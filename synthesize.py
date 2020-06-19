@@ -127,7 +127,7 @@ if __name__ == "__main__":
         num_speakers = 0
 
     # load the model
-    args.model_path="/content/"+args.config_path+"/"+args.model_path
+    args.model_path=args.config_path+"/"+args.model_path
     num_chars = len(phonemes) if C.use_phonemes else len(symbols)
     model = setup_model(num_chars, num_speakers, C)
     cp = torch.load(args.model_path)
