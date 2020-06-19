@@ -3,7 +3,7 @@ import json
 import re
 import torch
 import datetime
-
+import shutil
 
 class AttrDict(dict):
     def __init__(self, *args, **kwargs):
@@ -66,6 +66,9 @@ def save_checkpoint(model, optimizer, current_step, epoch, r, output_folder, **k
     checkpoint_path = os.path.join(output_folder, file_name)
     print(" > CHECKPOINT : {}".format(checkpoint_path))
     save_model(model, optimizer, current_step, epoch, r, checkpoint_path, **kwargs)
+    #send a copy to drive
+    shutil.copy(checkpoint_path,"/content/drive/My Drive/colab_saves/"+file_name)
+    print("checkpoint saved to drive")
 
 
 def save_best_model(target_loss, best_loss, model, optimizer, current_step, epoch, r, output_folder, **kwargs):
