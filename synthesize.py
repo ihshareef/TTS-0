@@ -12,10 +12,10 @@ from TTS.utils.io import load_config
 from TTS.utils.text.symbols import make_symbols, symbols, phonemes
 from TTS.utils.audio import AudioProcessor
 
-#audio display
-import numpy as np
-from IPython.display import Audio
-from scipy.io import wavfile
+#audio display, didnt work
+#import numpy as np
+#from IPython.display import Audio
+#from scipy.io import wavfile
 
 def tts(model,
         vocoder_model,
@@ -188,7 +188,3 @@ if __name__ == "__main__":
     out_path = os.path.join("/content/", "out.wav")
     print(" > Saving output to {}".format(out_path))
     ap.save_wav(wav, out_path)
-    data = wavfile.read('/content/out.wav')
-    framerate = data[0]
-    sounddata = data[1]
-    Audio(sounddata,rate=framerate)
