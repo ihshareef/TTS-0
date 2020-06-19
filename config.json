@@ -115,7 +115,7 @@
     "max_seq_len": 153,     // DATASET-RELATED: maximum text length
 
     // PATHS
-    "output_path": "/home/erogol/Models/LJSpeech/",
+    "output_path": "../",
 
     // PHONEMES
     "phoneme_cache_path": "/media/erogol/data_ssd2/mozilla_us_phonemes_3",  // phoneme computation is slow, therefore, it caches results in the given folder.
@@ -132,7 +132,7 @@
         [
             {
                 "name": "ljspeech",
-                "path": "/home/erogol/Data/LJSpeech-1.1/",
+                "path": "../LJSpeech-1.1/",
                 "meta_file_train": "metadata.csv",
                 "meta_file_val": null
             }
