@@ -52,10 +52,7 @@
     // },
 
     // DISTRIBUTED TRAINING
-    "distributed":{
-        "backend": "nccl",
-        "url": "tcp:\/\/localhost:54321"
-    },
+    //dont need
 
     "reinit_layers": [],    // give a list of layer names to restore from the given checkpoint. If not defined, it reloads all heuristically matching layers.
 
@@ -102,9 +99,9 @@
     "separate_stopnet": true,      // Train stopnet seperately if 'stopnet==true'. It prevents stopnet loss to influence the rest of the model. It causes a better model, but it trains SLOWER.
 
     // TENSORBOARD and LOGGING
-    "print_step": 25,       // Number of steps to log traning on console.
+    "print_step": 100,       // Number of steps to log traning on console.
     "print_eval": false,     // If True, it prints intermediate loss values in evalulation.
-    "save_step": 10000,      // Number of training steps expected to save traninpg stats and checkpoints.
+    "save_step": 1000,      // Number of training steps expected to save traninpg stats and checkpoints.
     "checkpoint": true,     // If true, it saves checkpoints per "save_step"
     "tb_model_param_stats": false,     // true, plots param stats per layer on tensorboard. Might be memory consuming, but good for debugging.
 
