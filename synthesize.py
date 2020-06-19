@@ -12,6 +12,10 @@ from TTS.utils.io import load_config
 from TTS.utils.text.symbols import make_symbols, symbols, phonemes
 from TTS.utils.audio import AudioProcessor
 
+#audio display
+import numpy as np
+from IPython.display import Audio
+from scipy.io import wavfile
 
 def tts(model,
         vocoder_model,
@@ -61,15 +65,17 @@ if __name__ == "__main__":
         type=str,
         help='Path to model file.',
     )
+    """
     parser.add_argument(
         'out_path',
         type=str,
         help='Path to save final wav file. Wav file will be names as the text given.',
     )
+    """
     parser.add_argument('--use_cuda',
                         type=bool,
                         help='Run model on CUDA.',
-                        default=False)
+                        default=True)
     parser.add_argument(
         '--vocoder_path',
         type=str,
@@ -102,7 +108,8 @@ if __name__ == "__main__":
         from WaveRNN.models.wavernn import Model as VocoderModel
 
     # load the config
-    C = load_config(args.config_path)
+    args.config_path = "/content/"+args.config_path
+    C = load_config(args.config_path+"/config.json")
     C.forward_attn_mask = True
 
     # load the audio processor
@@ -120,6 +127,7 @@ if __name__ == "__main__":
         num_speakers = 0
 
     # load the model
+    args.model_path="/content/"+args.config_path+"/"+args.model_path
     num_chars = len(phonemes) if C.use_phonemes else len(symbols)
     model = setup_model(num_chars, num_speakers, C)
     cp = torch.load(args.model_path)
@@ -158,7 +166,7 @@ if __name__ == "__main__":
         vocoder_model = None
         VC = None
         ap_vocoder = None
-
+    
     # synthesize voice
     print(" > Text: {}".format(args.text))
     _, _, _, wav = tts(model,
@@ -174,9 +182,13 @@ if __name__ == "__main__":
                        figures=False)
 
     # save the results
-    file_name = args.text.replace(" ", "_")
-    file_name = file_name.translate(
-        str.maketrans('', '', string.punctuation.replace('_', ''))) + '.wav'
-    out_path = os.path.join(args.out_path, file_name)
+    #file_name = args.text.replace(" ", "_")
+    #file_name = file_name.translate(
+    #    str.maketrans('', '', string.punctuation.replace('_', ''))) + '.wav'
+    out_path = os.path.join("/content/", "out.wav")
     print(" > Saving output to {}".format(out_path))
     ap.save_wav(wav, out_path)
+    data = wavfile.read('/content/out.wav')
+    framerate = data[0]
+    sounddata = data[1]
+    Audio(sounddata,rate=framerate)
