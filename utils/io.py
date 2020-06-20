@@ -68,6 +68,8 @@ def save_checkpoint(model, optimizer, current_step, epoch, r, output_folder, **k
     save_model(model, optimizer, current_step, epoch, r, checkpoint_path, **kwargs)
     #send a copy to drive
     shutil.copy(checkpoint_path,"/content/drive/My Drive/colab_saves/"+file_name)
+    bestmodelpath = os.path.join(output_folder,"best_model.pth.tar")
+    shutil.copy(bestmodelpath,"/content/drive/My Drive/colab_saves/best_model_"+current_step+".pth.tar")
     print("checkpoint saved to drive")
 
 
