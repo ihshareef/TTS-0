@@ -427,11 +427,17 @@ def evaluate(model, criterion, ap, global_step, epoch):
 
     if args.rank == 0 and epoch > c.test_delay_epochs:
         if c.test_sentences_file is None:
+            #test_sentences = [
+            #    "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
+            #    "Be a voice, not an echo.",
+            #    "I'm sorry Dave. I'm afraid I can't do that.",
+            #    "This cake is great. It's so delicious and moist."
+            #]
             test_sentences = [
-                "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-                "Be a voice, not an echo.",
-                "I'm sorry Dave. I'm afraid I can't do that.",
-                "This cake is great. It's so delicious and moist."
+                ".ވަރައް ގިނަ ވަގުތުވި އަޑެއް އުފައްދަން. ދެނެއް ހަނަކުން ނުހުންނާނަން",
+                ".ހުރިހާ  ބޭފުޅުންވެސް ގޭގާ ތިއްބަވާ",
+                ".މާފުކުރޭ އިންސާނާ، އަހަންނަކައް ތިކަމެއް ނުވާނެ",
+                ".އަހަންނަކީވެސް ދިރުމެއް ކަމައްވެދާނެ"
             ]
         else:
             with open(c.test_sentences_file, "r") as f:
