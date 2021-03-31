@@ -65,13 +65,11 @@ if __name__ == "__main__":
         type=str,
         help='Path to model file.',
     )
-    """
     parser.add_argument(
         'out_path',
         type=str,
         help='Path to save final wav file. Wav file will be names as the text given.',
     )
-    """
     parser.add_argument('--use_cuda',
                         type=bool,
                         help='Run model on CUDA.',
@@ -108,8 +106,8 @@ if __name__ == "__main__":
         from WaveRNN.models.wavernn import Model as VocoderModel
 
     # load the config
-    args.config_path = "/content/"+args.config_path
-    C = load_config(args.config_path+"/config.json")
+    # args.config_path = args.config_path
+    C = load_config(args.config_path)
     C.forward_attn_mask = True
 
     # load the audio processor
@@ -127,7 +125,7 @@ if __name__ == "__main__":
         num_speakers = 0
 
     # load the model
-    args.model_path=args.config_path+"/"+args.model_path
+    # args.model_path=args.config_path+"/"+args.model_path
     num_chars = len(phonemes) if C.use_phonemes else len(symbols)
     model = setup_model(num_chars, num_speakers, C)
     cp = torch.load(args.model_path)
@@ -185,6 +183,6 @@ if __name__ == "__main__":
     #file_name = args.text.replace(" ", "_")
     #file_name = file_name.translate(
     #    str.maketrans('', '', string.punctuation.replace('_', ''))) + '.wav'
-    out_path = os.path.join("/content/", "out.wav")
+    out_path = args.out_path
     print(" > Saving output to {}".format(out_path))
     ap.save_wav(wav, out_path)
