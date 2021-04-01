@@ -59,11 +59,13 @@ if __name__ == "__main__":
     parser.add_argument('text', type=str, help='Text to generate speech.')
     parser.add_argument('config_path',
                         type=str,
-                        help='Path to model config file.')
+                        help='Path to model config file.',
+                        default="./pretrained/config.json")
     parser.add_argument(
         'model_path',
         type=str,
         help='Path to model file.',
+        default="./pretrained/best_model.pth.tar"
     )
     parser.add_argument(
         'out_path',
