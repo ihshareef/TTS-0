@@ -115,7 +115,7 @@
     "max_seq_len": 153,     // DATASET-RELATED: maximum text length
 
     // PATHS
-    "output_path": "../",
+    "output_path": "/content/drive/MyDrive/javaabu_voice",
 
     // PHONEMES
     "phoneme_cache_path": "/media/erogol/data_ssd2/mozilla_us_phonemes_3",  // phoneme computation is slow, therefore, it caches results in the given folder.
