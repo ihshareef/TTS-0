@@ -60,18 +60,11 @@ def save_model(model, optimizer, current_step, epoch, r, output_path, **kwargs):
     state.update(kwargs)
     torch.save(state, output_path)
 
-
 def save_checkpoint(model, optimizer, current_step, epoch, r, output_folder, **kwargs):
     file_name = 'checkpoint_{}.pth.tar'.format(current_step)
     checkpoint_path = os.path.join(output_folder, file_name)
     print(" > CHECKPOINT : {}".format(checkpoint_path))
     save_model(model, optimizer, current_step, epoch, r, checkpoint_path, **kwargs)
-    #send a copy to drive
-    shutil.copy(checkpoint_path,"/content/drive/My Drive/colab_saves/"+file_name)
-    #bestmodelpath = os.path.join(output_folder,"best_model.pth.tar")
-    #shutil.copy(bestmodelpath,"/content/drive/My Drive/colab_saves/best_model_"+current_step+".pth.tar")
-    print("checkpoint saved to drive")
-
 
 def save_best_model(target_loss, best_loss, model, optimizer, current_step, epoch, r, output_folder, **kwargs):
     if target_loss < best_loss:
