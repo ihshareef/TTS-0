@@ -164,7 +164,7 @@ def train(model, criterion, optimizer, optimizer_st, scheduler,
         # forward pass model
         if c.bidirectional_decoder:
             decoder_output, postnet_output, alignments, stop_tokens, decoder_backward_output, alignments_backward = model(
-                text_input, text_lengths, mel_input, speaker_ids=speaker_ids)
+                text_input, text_lengths.cpu(), mel_input, speaker_ids=speaker_ids)
         else:
             decoder_output, postnet_output, alignments, stop_tokens = model(
                 text_input, text_lengths.cpu(), mel_input, speaker_ids=speaker_ids)
@@ -335,10 +335,10 @@ def evaluate(model, criterion, ap, global_step, epoch):
             # forward pass model
             if c.bidirectional_decoder:
                 decoder_output, postnet_output, alignments, stop_tokens, decoder_backward_output, alignments_backward = model(
-                    text_input, text_lengths, mel_input, speaker_ids=speaker_ids)
+                    text_input, text_lengths.cpu(), mel_input, speaker_ids=speaker_ids)
             else:
                 decoder_output, postnet_output, alignments, stop_tokens = model(
-                    text_input, text_lengths, mel_input, speaker_ids=speaker_ids)
+                    text_input, text_lengths.cpu(), mel_input, speaker_ids=speaker_ids)
                 decoder_backward_output = None
 
             # set the alignment lengths wrt reduction factor for guided attention
