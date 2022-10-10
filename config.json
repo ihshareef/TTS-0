@@ -132,9 +132,9 @@
         [
             {
                 "name": "ljspeech",
-                "path": "../LJSpeech-1.1/",
-                "meta_file_train": "metadata.csv",
-                "meta_file_val": null
+                "path": "/content/dataset",
+                "meta_file_train": "metadata_train.csv",
+                "meta_file_val": "metadata_val.csv"
             }
         ]
 
